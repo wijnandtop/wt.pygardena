@@ -7,7 +7,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='wt.pygardena',
-    version='0.9.2',
+    version='0.9.3',
     packages=['wt.pygardena'],
     url='https://github.com/wijnandtop/wt.pygardena',
     license='GNU General Public License v3.0',
