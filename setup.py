@@ -15,5 +15,8 @@ setup(
     author_email='wijnand@bammes.nl',
     description='Library to connect to Garena Smart',
     long_description=long_description,
-    long_description_content_type='text/markdown'
+    long_description_content_type='text/markdown',
+    install_requires=[
+        'objectpath',
+    ]
 )
