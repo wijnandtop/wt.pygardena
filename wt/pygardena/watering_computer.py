@@ -1,4 +1,4 @@
-from custom_components.pygardena.device import *
+from .device import *
 
 class GardenaSmartWateringComputer(GardenaSmartDevice):
     def __init__(self, location, raw_data):

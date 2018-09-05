@@ -1,7 +1,7 @@
-from custom_components.pygardena.account import *
-from custom_components.pygardena.mower import *
-from custom_components.pygardena.sensor import *
-from custom_components.pygardena.watering_computer import *
+from .account import *
+from .mower import *
+from .sensor import *
+from .watering_computer import *
 import json
 
 class GardenaSmartLocation:
