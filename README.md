@@ -1,7 +1,8 @@
 # wt.pygardena
 Python library to communicate with Gardana Smart
 It gives an object oriented interface towards the Gardena Smart API (API usage is not officially supported by Gardena).
-This library is written to be used to support gardena devices in home assistant, but there is no coupling with home assistant. 
+This library is written to be used to support gardena devices in home assistant, but there is no coupling with home assistant.
+Inspired by: https://github.com/rcastberg/gardena_smart 
  
 ## usage
 
