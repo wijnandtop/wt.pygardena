@@ -1,12 +1,9 @@
 from .account import *
 import objectpath
-import logging
-
-_LOGGER = logging.getLogger(__name__)
 
 class GardenaSmartDevice:
     def __init__(self, location, raw_data):
-        self.location = location  # type:GardenaSmartLocation
+        self.location = location
         self.raw_data = raw_data
         self.name = raw_data['name']
         self.zone = None
@@ -20,7 +17,6 @@ class GardenaSmartDevice:
         return list(ability.execute('$.properties[@.name is '+property+']'))[0]['value']
 
     def update(self):
-        _LOGGER.debug('update '+self.name+' id: '+self.id)
         self.raw_data = self.location.get_raw_device_data(self.id)
 
     def get_category(self):
@@ -56,8 +52,6 @@ class GardenaSmartDevice:
         url = 'https://smart.gardena.com/sg-1/devices/' + self.id + '/abilities/' + self.category + '/command?locationId=' + self.location.id
         headers = self.location.gardena_hub.create_header(Token=self.location.gardena_hub.AuthToken)
         response = self.location.gardena_hub.s.post(url, headers=headers, data=data)
-        _LOGGER.debug(response)
-        _LOGGER.debug(response.content.decode('utf-8'))
         # @todo, maybe check response and do some error handing?
 
 

@@ -3,9 +3,6 @@ from custom_components.pygardena.mower import *
 from custom_components.pygardena.sensor import *
 from custom_components.pygardena.watering_computer import *
 import json
-import logging
-
-_LOGGER = logging.getLogger(__name__)
 
 class GardenaSmartLocation:
     def __init__(self, gardena_hub, raw_data):
