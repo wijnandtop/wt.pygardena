@@ -61,13 +61,13 @@ location.get_sensors() # Get all sensors from this location.
 location.get_watering_computers() # Get all watering computers from this location.
 ```
 
-## devices
+## All devices
 
-All devices have these details: category, battery_level, radio_quality, radio_connection_status
-All devices extend from GardenaSmartDevice.
+Have these details: category, battery_level, radio_quality, radio_connection_status
+Extend from GardenaSmartDevice.
 Currently it is not possible to update the internal state from a device.
 
-### GardenaSmartMower
+## GardenaSmartMower
 
 Available methods:
 ```python
