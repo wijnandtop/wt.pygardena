@@ -1,8 +1,18 @@
 # wt.pygardena
 Python library to communicate with Gardana Smart
 It gives an object oriented interface towards the Gardena Smart API (API usage is not officially supported by Gardena).
-This library is written to be used to support gardena devices in home assistant, but there is no coupling with home assistant.
-Inspired by: https://github.com/rcastberg/gardena_smart 
+T
+his library is written to be used to support gardena devices in https://www.home-assistant.io currently using my custom_component https://github.com/wijnandtop/home_assistant_gardena. It can be used for other purposes as well, since it doesn't have any home assistent specific implementations.
+
+Inspired by: 
+https://github.com/rcastberg/gardena_smart 
+
+It is build to have limited interaction with the API of gardena. Fetching information is done via 2 call's.
+
+* get all locations
+* get devices per location
+
+Objects fetch data from the internal state, update of internal state has to be explicitly triggered. 
  
 ## usage
 
@@ -19,8 +29,17 @@ for location in hub.get_locations():
 
 ```
 
+## GardenaSmartAccount
+
+Available methods:
+* get_locations() - returns list of GardenaSmartLocation objects, if there is no internal state it will call the Gardena API
+* update_devices() - Loops over all locations and updates the internal state.
+* get_all_mowers() - Get all mowers from all locations.
+* get_all_sensors() - Get all sensors from all locations.
+* get_all_watering_computers() - Get all watering computers from all locations.
+
 ## devices
-All devices are represented by object, all object do have a method to expose all details as a named list. 
+All devices are represented by an object, all object do have a method to expose all details as a named list. 
 ```python
 object.get_info()
 ```
