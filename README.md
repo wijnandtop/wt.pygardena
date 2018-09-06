@@ -107,10 +107,11 @@ scheduled_watering_end, adaptive_scheduling_last_decision
 
 Since I do not own the devices, but feel free to sponsor me ;-)
 
+* smart irrigation control (on top of my wishlist)
 * Smart pressure pump
 * smart power adapter
 * smart battery
-* smart irrigation control (is on my wishlist)
+
 
 
 
