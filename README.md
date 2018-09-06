@@ -25,30 +25,45 @@ for location in hub.get_locations():
         print (sensor.get_info())
     for watering_computer in location.get_watering_computers():
         print (watering_computer.get_info())
-
-
 ```
+
+## Object information
+All object (except GardenaSmartAccount) have attributes which can be retrieved by either:
+```python
+object.get_info()
+```
+Which retuns a named list or:
+```python
+#[attribute] needs to be replaced by the detail name.
+object.get_[attribute].() 
+```
+
 
 ## GardenaSmartAccount
 
 Available methods:
-* get_locations() - returns list of GardenaSmartLocation objects, if there is no internal state it will call the Gardena API
-* update_devices() - Loops over all locations and updates the internal state.
-* get_all_mowers() - Get all mowers from all locations.
-* get_all_sensors() - Get all sensors from all locations.
-* get_all_watering_computers() - Get all watering computers from all locations.
+```python
+account.get_locations() # returns list of GardenaSmartLocation objects, if there is no internal state it will call the Gardena API
+account.update_devices() # Loops over all locations and updates the internal state.
+account.get_all_mowers() # Get all mowers from all locations.
+account.get_all_sensors() # Get all sensors from all locations.
+account.get_all_watering_computers() # Get all watering computers from all locations.
+```
+
+## GardenaSmartLocation
+
+Available methods:
+```python
+location.update_devices() # updates the internal state of all devices in this location.
+location.get_mowers() # Get all mowers from this location.
+location.get_sensors() # Get all sensors from this location.
+location.get_watering_computers() # Get all watering computers from this location.
+```
 
 ## devices
-All devices are represented by an object, all object do have a method to expose all details as a named list. 
-```python
-object.get_info()
-```
 All devices have these details: category, battery_level, radio_quality, radio_connection_status
-All details are available via getters so:
-```python
-#[detail] needs to be replaced by the detail name.
-object.get_[detail].() 
-```
+All devices extend from GardenaSmartDevice.
+Currently it is not possible to update the internal state from a device.
 
 ### mower
 Actions:
