@@ -32,7 +32,7 @@ All object (except GardenaSmartAccount) have attributes which can be retrieved b
 ```python
 object.get_info()
 ```
-Which retuns a named list or:
+Which retuns a named list, or:
 ```python
 #[attribute] needs to be replaced by the detail name.
 object.get_[attribute].() 
