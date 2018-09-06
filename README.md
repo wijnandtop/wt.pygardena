@@ -28,6 +28,7 @@ for location in hub.get_locations():
 ```
 
 ## Object information
+
 All object (except GardenaSmartAccount) have attributes which can be retrieved by either:
 ```python
 object.get_info()
@@ -61,12 +62,14 @@ location.get_watering_computers() # Get all watering computers from this locatio
 ```
 
 ## devices
+
 All devices have these details: category, battery_level, radio_quality, radio_connection_status
 All devices extend from GardenaSmartDevice.
 Currently it is not possible to update the internal state from a device.
 
-### mower
-Actions:
+### GardenaSmartMower
+
+Available methods:
 ```python
 mower.start() #starts mowing for a full day (can be specified)
 mower.park_until_timer() #stop mowing and  wait for next schedule
@@ -76,12 +79,14 @@ mower.park() #stop mower, don't continue schedule
 Available info: manual_operation, status, error, battery_charging, last_error_code, source_for_next_start, 
 timestamp_next_start, cutting_time, charging_cycles, collisions, running_time
 
-## sensor
-Actions: none
+## GardenaSmartSensor
+
+Available methods: none
 Available info: ambient_temperature, ambient_frost_warning, soil_temperature, soil_humidity, light
 
-## watering computer
-Actions:
+## GardenaSmartWateringComputer
+
+Available methods:
  ```python
  watering_computer.start() #starts watering for a 30 (can be specified)
  watering_computer.stop() #stop watering and  wait for next schedule 
@@ -99,6 +104,7 @@ scheduled_watering_end, adaptive_scheduling_last_decision
  * Sensor: GARDENA smart Sensor (Article No. : 19030-20)
  
 ## not planned yet
+
 Since I do not own the devices, but feel free to sponsor me ;-)
 
 * Smart pressure pump
