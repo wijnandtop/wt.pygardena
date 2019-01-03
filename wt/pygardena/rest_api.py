@@ -52,6 +52,6 @@ class RestAPI(requests.Session):
             data['parameters'] = parameters
 
         url = 'devices/{device.id}/abilities/{device.category}/command'.format(device=device)
-        response = self.post(url, params={
+        return self.post(url, params={
             'locationId': device.location.id
         }, json=data)
