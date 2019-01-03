@@ -15,14 +15,9 @@ class GardenaSmartAccount:
 
 
     def load_locations(self):
-        url = "https://smart.gardena.com/sg-1/locations/"
-        response = self.rest_api.get("locations", params={
-            'user_id': self.userID,
-        })
-        response_data = response.json()
-        self.raw_locations = response_data
+        self.raw_locations = response_data = self.rest_api.get_locations(self.userID)
         for location in response_data['locations']:
-            self.locations.add(GardenaSmartLocation(self, location))
+            self.locations.add(GardenaSmartLocation(self.rest_api, location))
 
     def get_locations(self):
         if len(self.locations) == 0:
@@ -43,13 +38,7 @@ class GardenaSmartAccount:
         """
         Get authentication token from servers and store it as the session in the Rest API.
         """
-        response = self.rest_api.post('sessions', json={
-            'sessions': {
-                'email': self.email_address,
-                'password': self.password,
-            }
-        })
-        response_data = response.json()
+        response_data = self.rest_api.post_sessions(self.email_address, self.password)
         self.AuthToken = response_data['sessions']['token']
         self.refreshToken = response_data['sessions']['refresh_token']
         self.userID = response_data['sessions']['user_id']
