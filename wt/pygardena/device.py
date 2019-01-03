@@ -47,11 +47,9 @@ class GardenaSmartDevice:
         data = {'name': name}
         if parameters is not None:
             data['parameters'] = parameters
-        data = json.dumps(data)
 
-        url = 'https://smart.gardena.com/sg-1/devices/' + self.id + '/abilities/' + self.category + '/command?locationId=' + self.location.id
-        headers = self.location.gardena_hub.create_header(Token=self.location.gardena_hub.AuthToken)
-        response = self.location.gardena_hub.s.post(url, headers=headers, data=data)
+        url = 'devices/{self.id}/abilities/{self.category}/command'.format(self=self)
+        response = self.location.gardena_hub.rest_api.post(url, params={
+            'locationId': self.location.id
+        }, json=data)
         # @todo, maybe check response and do some error handing?
-
-

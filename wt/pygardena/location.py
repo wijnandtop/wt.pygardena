@@ -68,13 +68,11 @@ class GardenaSmartLocation:
             device.update()
 
     def update_raw_data(self):
-        url = "https://smart.gardena.com/sg-1/devices"
         params = (
             ('locationId', self.id),
         )
-        headers = self.gardena_hub.create_header(Token=self.gardena_hub.AuthToken)
-        response = self.gardena_hub.s.get(url, headers=headers, params=params)
-        response_data = json.loads(response.content.decode('utf-8'))
+        response = self.gardena_hub.rest_api.get('devices', params=params)
+        response_data = response.json()
         self.raw_devices = response_data
 
     def get_raw_device_data(self, device_id):

@@ -1,26 +1,25 @@
-import json
 from .location import *
-import requests
-
+from .rest_api import RestAPI
 
 class GardenaSmartAccount:
-    def __init__(self, email_address=None, password=None):
-        self.locations = set()
-        self.raw_locations = None
-        self.s = requests.session()
+    
+    def __init__(self, email_address, password):
         self.email_address = email_address
         self.password = password
+        
+        self.rest_api = RestAPI()
+        
+        self.locations = set()
+        self.raw_locations = None
         self.update_authtokens()
 
 
     def load_locations(self):
         url = "https://smart.gardena.com/sg-1/locations/"
-        params = (
-            ('user_id', self.userID),
-        )
-        headers = self.create_header(Token=self.AuthToken)
-        response = self.s.get(url, headers=headers, params=params)
-        response_data = json.loads(response.content.decode('utf-8'))
+        response = self.rest_api.get("locations", params={
+            'user_id': self.userID,
+        })
+        response_data = response.json()
         self.raw_locations = response_data
         for location in response_data['locations']:
             self.locations.add(GardenaSmartLocation(self, location))
@@ -34,32 +33,27 @@ class GardenaSmartAccount:
         for location in self.raw_locations:
             if location.id == location_id:
                 return location
-        # @todo trow exception if not found
+        raise KeyError(location_id)
 
     def update_devices(self):
         for location in self.locations:
             location.update_devices()
-
-    def create_header(self, Token=None, ETag=None):
-        headers={
-            'Content-Type': 'application/json',
-        }
-        if Token is not None:
-            headers['X-Session']=Token
-        if ETag is not None:
-            headers['If-None-Match'] = ETag
-        return headers
-
+    
     def update_authtokens(self):
-        """Get authentication token from servers"""
-        data = '{"sessions":{"email":"' + self.email_address + '","password":"' + self.password + '"}}'
-        url = 'https://smart.gardena.com/sg-1/sessions'
-        headers = self.create_header()
-        response = self.s.post(url, headers=headers, data=data)
-        response_data = json.loads(response.content.decode('utf-8'))
+        """
+        Get authentication token from servers and store it as the session in the Rest API.
+        """
+        response = self.rest_api.post('sessions', json={
+            'sessions': {
+                'email': self.email_address,
+                'password': self.password,
+            }
+        })
+        response_data = response.json()
         self.AuthToken = response_data['sessions']['token']
         self.refreshToken = response_data['sessions']['refresh_token']
         self.userID = response_data['sessions']['user_id']
+        self.rest_api.headers['X-Session'] = self.AuthToken
 
     def get_all_mowers(self):
         all_mowers = set()
