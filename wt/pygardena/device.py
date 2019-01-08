@@ -1,5 +1,4 @@
 from .account import *
-import objectpath
 
 class GardenaSmartDevice:
     def __init__(self, rest_api, location, raw_data):
@@ -13,9 +12,13 @@ class GardenaSmartDevice:
         self.update()
 
     def get_value_of_property(self, ability, property):
-        abilities = objectpath.Tree(self.raw_data)
-        ability = objectpath.Tree(list(abilities.execute('$.abilities[@.type is '+ability+']'))[0])
-        return list(ability.execute('$.properties[@.name is '+property+']'))[0]['value']
+        for data_ability in self.raw_data['abilities']:
+            if data_ability['type'] != ability:
+                continue
+            for data_property in data_ability.properties:
+                if data_property['name'] == property:
+                    return data_property['value']
+        return None
 
     def update(self):
         self.raw_data = self.location.get_raw_device_data(self.id)
