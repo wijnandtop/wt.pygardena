@@ -19,6 +19,7 @@ setuptools.setup(
     python_requires=">=3.4",
     install_requires=[
         'objectpath',
+        'requests',
     ],
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -33,4 +34,5 @@ setuptools.setup(
         "Topic :: Home Automation",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
+    tests_require = ['requests-mock']
 )
