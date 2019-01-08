@@ -5,8 +5,8 @@ from .watering_computer import *
 import json
 
 class GardenaSmartLocation:
-    def __init__(self, gardena_hub, raw_data):
-        self.gardena_hub = gardena_hub  # type:GardenaSmartAccount
+    def __init__(self, rest_api, raw_data):
+        self.rest_api = rest_api
         self.raw_data = raw_data
         self.raw_devices = None
         self.name = raw_data['name']
@@ -15,12 +15,6 @@ class GardenaSmartLocation:
         self.devices_sensor = set()
         self.devices_watering_computer = set()
         self.load_devices()
-
-    def update(self):
-        try:
-            self.raw_data = self.gardena_hub.get_raw_location_data(self.id)
-        except:
-            return False  # failed to fetch new data.
 
     def get_id(self):
         return self.id
@@ -68,14 +62,7 @@ class GardenaSmartLocation:
             device.update()
 
     def update_raw_data(self):
-        url = "https://smart.gardena.com/sg-1/devices"
-        params = (
-            ('locationId', self.id),
-        )
-        headers = self.gardena_hub.create_header(Token=self.gardena_hub.AuthToken)
-        response = self.gardena_hub.s.get(url, headers=headers, params=params)
-        response_data = json.loads(response.content.decode('utf-8'))
-        self.raw_devices = response_data
+        self.raw_devices = self.rest_api.get_devices(self.id)
 
     def get_raw_device_data(self, device_id):
         for device in self.raw_devices['devices']:
@@ -96,10 +83,10 @@ class GardenaSmartLocation:
         self.update_raw_data()
         for device in self.raw_devices['devices']:
             if device['category'] == 'mower':
-                self.devices_mower.add(GardenaSmartMower(self, device))
+                self.devices_mower.add(GardenaSmartMower(self.rest_api, self, device))
             if device['category'] == 'sensor':
-                self.devices_sensor.add(GardenaSmartSensor(self, device))
+                self.devices_sensor.add(GardenaSmartSensor(self.rest_api, self, device))
             if device['category'] == 'watering_computer':
-                self.devices_watering_computer.add(GardenaSmartWateringComputer(self, device))
+                self.devices_watering_computer.add(GardenaSmartWateringComputer(self.rest_api, self, device))
 
 
