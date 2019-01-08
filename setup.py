@@ -18,6 +18,7 @@ setuptools.setup(
     long_description_content_type='text/markdown',
     python_requires=">=3.4",
     install_requires=[
+        'objectpath',
         'requests',
     ],
     classifiers=[
