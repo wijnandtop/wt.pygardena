@@ -111,6 +111,19 @@ Since I do not own the devices, but feel free to sponsor me ;-)
 * smart power adapter
 * smart battery
 
+## Changelog
+
+###0.9.3
+
+Initial version
+
+###0.9.4
+
+* Change license to Apache 2.0
+* RestAPI class that encapsulates API access
+* Removed object_path dependency that occured just once
+* update metadata
+
 
 
 
