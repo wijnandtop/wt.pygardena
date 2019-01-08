@@ -7,7 +7,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setuptools.setup(
     name='wt.pygardena',
-    version='0.9.3',
+    version='0.9.5',
     packages=setuptools.find_packages(),
     url='https://github.com/wijnandtop/wt.pygardena',
     license='Apache License 2.0',
