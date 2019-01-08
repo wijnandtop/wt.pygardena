@@ -15,7 +15,7 @@ class GardenaSmartDevice:
         for data_ability in self.raw_data['abilities']:
             if data_ability['type'] != ability:
                 continue
-            for data_property in data_ability.properties:
+            for data_property in data_ability['properties']:
                 if data_property['name'] == property:
                     return data_property['value']
         return None
