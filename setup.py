@@ -10,7 +10,7 @@ setuptools.setup(
     version='0.9.3',
     packages=setuptools.find_packages(),
     url='https://github.com/wijnandtop/wt.pygardena',
-    license='GNU General Public License v3.0',
+    license='Apache License 2.0',
     author='Wijnand Top',
     author_email='wijnand@bammes.nl',
     description='Library to connect to Garena Smart',
@@ -19,11 +19,12 @@ setuptools.setup(
     python_requires=">=3.4",
     install_requires=[
         'objectpath',
+        'requests',
     ],
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
-        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "License :: OSI Approved :: Apache Software License",
         "Natural Language :: English",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3.4",
@@ -33,4 +34,5 @@ setuptools.setup(
         "Topic :: Home Automation",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
+    tests_require = ['requests-mock']
 )

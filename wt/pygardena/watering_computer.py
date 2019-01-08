@@ -1,8 +1,8 @@
 from .device import *
 
 class GardenaSmartWateringComputer(GardenaSmartDevice):
-    def __init__(self, location, raw_data):
-        super().__init__(location, raw_data)
+    def __init__(self, rest_api, location, raw_data):
+        super().__init__(rest_api, location, raw_data)
         self.category = "outlet"
         self._valve_open = self.get_value_of_property('watering_outlet', 'valve_open')
 

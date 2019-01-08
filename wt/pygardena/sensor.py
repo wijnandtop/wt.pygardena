@@ -1,8 +1,8 @@
 from .device import *
 
 class GardenaSmartSensor(GardenaSmartDevice):
-    def __init__(self, location, raw_data):
-        super().__init__(location, raw_data)
+    def __init__(self, rest_api, location, raw_data):
+        super().__init__(rest_api, location, raw_data)
         self.category = "sensor"
 
 
