@@ -1,7 +1,8 @@
 from .account import *
 
 class GardenaSmartDevice:
-    def __init__(self, location, raw_data):
+    def __init__(self, rest_api, location, raw_data):
+        self.rest_api = rest_api
         self.location = location
         self.raw_data = raw_data
         self.name = raw_data['name']
@@ -47,14 +48,4 @@ class GardenaSmartDevice:
         return device_info
 
     def send_command(self, name, parameters=None):
-        data = {'name': name}
-        if parameters is not None:
-            data['parameters'] = parameters
-        data = json.dumps(data)
-
-        url = 'https://smart.gardena.com/sg-1/devices/' + self.id + '/abilities/' + self.category + '/command?locationId=' + self.location.id
-        headers = self.location.gardena_hub.create_header(Token=self.location.gardena_hub.AuthToken)
-        response = self.location.gardena_hub.s.post(url, headers=headers, data=data)
-        # @todo, maybe check response and do some error handing?
-
-
+        self.rest_api.post_command(self, name, parameters)
