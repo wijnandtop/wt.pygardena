@@ -128,6 +128,10 @@ Initial version
 
 * Reverted: Removed object_path dependency that occured just once
 
+###0.9.6
+
+* Changed API endpoint (old one was broken)
+
 
 
 

@@ -7,7 +7,7 @@ class RestAPI(requests.Session):
     """
     
     # The base URL for all Gardena requests. Change this if you want to fire the requests against other services
-    base_url = "https://smart.gardena.com/sg-1/"
+    base_url = "https://sg-api.dss.husqvarnagroup.net/sg-1/"
     
     def __init__(self, *args, **kw):
         super().__init__(*args, **kw)
