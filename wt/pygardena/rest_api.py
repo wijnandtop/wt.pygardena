@@ -26,6 +26,7 @@ class RestAPI(requests.Session):
                 'password': password,
             }
         })
+        response.raise_for_status()
         return response.json()
     
     def get_locations(self, user_id):
